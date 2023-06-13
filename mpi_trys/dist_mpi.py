@@ -32,7 +32,7 @@ def eachproc(N):
     print(f"rank {rank} : {local_array}")
     
 def make_mat():
-    shape = 5
+    shape = 6
     local_mat = np.ones((shape,shape)).astype(int) * rank
     return local_mat
     

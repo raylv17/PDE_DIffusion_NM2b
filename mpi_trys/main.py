@@ -12,17 +12,27 @@ D = lambda x : 1
 S = lambda x,t : 0
 
 # eachproc(N)
-Determine_Value(L,h,D)
-# shape = 4
+# Determine_Value(L,h,D)
 
-# local_mat = make_mat()
-# print(f"matrix at {rank}")
+local_mat = make_mat()
+print(f"matrix at {rank}")
 # print(local_mat)
 # print()
 
+# for i in range(2):  
+    # print(i)
+    # swap_mat = exchange_vals(local_mat)
+    # print(swap_mat)
+    # print()
 
-# swap_mat = exchange_vals(local_mat)
+swap_mat = exchange_vals(local_mat)
 # print(swap_mat)
-# print()
+gather_mat = comm.gather(local_mat, root = 0)
 
-
+if rank == 0:
+    print(f"{rank}")
+    # print(gather_mat)
+    print(np.shape(gather_mat))
+    gather_mat = np.concatenate(gather_mat, axis=1)
+    print(np.shape(gather_mat))
+    print(gather_mat)
