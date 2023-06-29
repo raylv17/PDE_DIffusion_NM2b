@@ -31,9 +31,17 @@ def eachproc(N):
         
     print(f"rank {rank} : {local_array}")
     
-def make_mat():
-    shape = 6
+def make_mat(shape):
+    # shape = 6
     local_mat = np.ones((shape,shape)).astype(int) * rank
+    return local_mat
+    
+def create_halo(local_mat):
+    shape = np.shape(local_mat[:,0])
+    extra_col = np.ones(shape).astype(int)*rank
+    local_mat = np.c_[extra_col, local_mat, extra_col]
+    
+    # print(local_mat)
     return local_mat
     
 def exchange_vals(local_mat):

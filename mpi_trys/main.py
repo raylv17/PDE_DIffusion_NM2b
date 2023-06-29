@@ -14,8 +14,11 @@ S = lambda x,t : 0
 # eachproc(N)
 # Determine_Value(L,h,D)
 
-local_mat = make_mat()
-print(f"matrix at {rank}")
+
+local_mat = make_mat(5)
+
+
+local_mat = create_halo(local_mat)
 # print(local_mat)
 # print()
 
@@ -26,8 +29,9 @@ print(f"matrix at {rank}")
     # print()
 
 swap_mat = exchange_vals(local_mat)
-# print(swap_mat)
-gather_mat = comm.gather(local_mat, root = 0)
+print(f"matrix at {rank}")
+print(swap_mat)
+gather_mat = comm.gather(local_mat[:,1:-1], root = 0)
 
 if rank == 0:
     print(f"{rank}")
