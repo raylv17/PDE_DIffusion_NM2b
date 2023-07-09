@@ -57,3 +57,13 @@ def exchange_vals(local_mat):
         local_mat[:,0] = recv_right
         
     return local_mat
+    
+    
+def manipulate_mat(local_mat):
+    shape = np.shape(local_mat)
+    print(shape)
+    for i in range(shape[0]):
+        for j in range(1, shape[1]-1):
+            local_mat[i,j] = local_mat[i,j] + 1
+            
+    return local_mat
