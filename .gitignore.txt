@@ -2,8 +2,7 @@
 
 .ipynb_checkpoints/
 mpi_trys/__pycache__/
-parallel_diffusion/*.png
-parallel_diffusion/*.jpg
+
 
 
 # files to ignore
@@ -11,3 +10,14 @@ parallel_diffusion/*.jpg
 *.png
 *.jpg
 *.txt
+*.csv
+parallel_diffusion/*.png
+parallel_diffusion/*.jpg
+parallel_diffusion/*.csv
+parallel_diffusion/*.txt
+parallel_diffusion/*.ipynp
+serial_diffusion/*.png
+serial_diffusion/*.jpg
+serial_diffusion/*.csv
+serial_diffusion/*.txt
+serial_diffusion/*.ipynp
