@@ -1,13 +1,15 @@
 from ftcs import *
 
 L = 5
-N = 2000
+N = 50
 
 tau = 0.001
 v0 = lambda x : float(abs(x)<1.5);
 
-D = lambda x : 1
-S = lambda x,t : 0
+# D = lambda x : 1
+# S = lambda x,t : 0
+D = lambda x : 1-abs(x)/10;
+S = lambda x,t : -4*np.double(abs(x)<0.1 and t>0.1 and  t<0.6);
 
 
 [V1,x,t] = ftcs(L,N,tau,D,S,v0,name="out_DS0.txt");
@@ -23,15 +25,15 @@ global_x  = comm.gather(x, root = 0)
 
 if rank == 0:
     V1 = np.concatenate(global_V1, axis=1)
-    # print(f"rank : A | {V1[3,:]}")
-    # np.savetxt("V_mat_par.csv", V1, delimiter=",")
+    # print(f"rank : A | {V1}")
+    np.savetxt(f"V_all{size}.csv", V1, delimiter=",")
 
     x = np.concatenate(global_x)
     print(f"size V1 : {np.shape(V1)}")
     print(f"size x  : {np.shape(x)}")
     print(f"size t  : {np.shape(t)}")
     # lt = int((N/10)*(10))-1;
-    lt = 3;
+    lt = 1;
     sig = np.sqrt(2*D(0)*t[lt]);
     v_ex = 0.5*( erf((1.5-x)/(np.sqrt(2)*sig)) - erf((-1.5-x)/(np.sqrt(2)*sig)) );
     plt.subplot(3,1,1)
@@ -41,7 +43,7 @@ if rank == 0:
     plt.ylabel('v(x,t)')
     plt.title(f'size : {size} | t={t[lt]:.6f}')
     
-    lt = 100 - 1
+    lt = N//2 - 1
     # lt =int((N/10)*(2))-1;
     sig = np.sqrt(2*D(0)*t[lt]);
     v_ex = 0.5*( erf((1.5-x)/(np.sqrt(2)*sig)) - erf((-1.5-x)/(np.sqrt(2)*sig)) );
@@ -52,7 +54,7 @@ if rank == 0:
     plt.ylabel('v(x,t)')
     plt.title(f't={t[lt]:.6f}')
 
-    lt = 2000 - 1
+    lt = N - 1
     # lt = int((N/10)*(5))-1;
     sig = np.sqrt(2*D(0)*t[lt]);
     v_ex = 0.5*( erf((1.5-x)/(np.sqrt(2)*sig)) - erf((-1.5-x)/(np.sqrt(2)*sig)) );

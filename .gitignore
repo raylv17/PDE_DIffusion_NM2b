@@ -1,0 +1,13 @@
+# directories to ignore
+
+**/.ipynb_checkpoints
+**/__pycache__/
+
+
+
+# files to ignore
+**.ipynb
+**.png
+**.jpg
+**.txt
+**.csv
