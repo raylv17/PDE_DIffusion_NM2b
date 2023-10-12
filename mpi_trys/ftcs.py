@@ -42,7 +42,7 @@ def exchange_vals1(local_mat,i):
 def exchange_vals(local_mat,i):
     shape = np.shape(local_mat[:,0])
     sendleft = np.ascontiguousarray(local_mat[:,1])
-    print(f"{sendleft}#r{rank}_i{i}")
+    # print(f"{sendleft}#r{rank}_i{i}")
     sendright = np.ascontiguousarray(local_mat[:,-2])
     recvleft = np.zeros(shape)
     recvright = np.zeros(shape)
@@ -56,14 +56,14 @@ def exchange_vals(local_mat,i):
         # print(recvright, sendright)
         # print(recvright)
 
-    np.savetxt(f"exchange/r{rank}_i{i:0=4}A.csv",local_mat)
+    # np.savetxt(f"exchange/r{rank}_i{i:0=4}A.csv",local_mat)
     # print(rank)
     if rank > 0:
         local_mat[:,0] = recvleft
     if rank < size - 1:
         local_mat[:,-1] = recvright
     
-    np.savetxt(f"exchange/r{rank}_i{i:0=4}B.csv",local_mat)
+    # np.savetxt(f"exchange/r{rank}_i{i:0=4}B.csv",local_mat)
 
     return local_mat
         
@@ -88,9 +88,10 @@ def ftcs(L,N,tau,D,S,v0,name="untitled.txt"):
     h = comm.bcast(h,root=0)
     # print(f"at rank {rank}, h : {h}")
     comm.Scatter(global_x, x, root = 0)
-    V = np.zeros([N, np.size(x)]);
-    V = create_halo(V)
+    
+    # V = create_halo(V)
     x = create_halo(x,h)
+    V = np.zeros([N, np.size(x)]);
     # print(f"rank{rank}::\nx:{x}")
     
     # print(f"at rank : {rank}, len(x) : {len(x)}")
@@ -142,5 +143,5 @@ def ftcs(L,N,tau,D,S,v0,name="untitled.txt"):
     V = V[:,1:-1];
     x = x[1:-1];
 
-    np.savetxt(f"V_{rank}of{size}.csv", V, delimiter=",")
+    # np.savetxt(f"V_{rank}of{size}.csv", V, delimiter=",")
     return V,x,t

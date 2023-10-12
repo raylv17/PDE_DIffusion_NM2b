@@ -21,23 +21,36 @@ def create_halo(local_mat, h):
     return local_mat
     
 def exchange_vals(local_mat):
-    # print(f"sending from {rank}")
-    if rank < size - 1:
-        # print(f"{local_mat[:,-1]} recv from {rank}")
-        comm.send(local_mat[:,-2], dest = rank + 1, tag = 1)
-        recv_left = comm.recv(source = rank + 1, tag = 1)
-        local_mat[:,-1] = recv_left
-    
+    shape = np.shape(local_mat[:,0])
+    sendleft = np.ascontiguousarray(local_mat[:,1])
+    # print(f"{sendleft}#r{rank}_i{i}")
+    sendright = np.ascontiguousarray(local_mat[:,-2])
+    recvleft = np.zeros(shape)
+    recvright = np.zeros(shape)
+    # print(local_mat)
     if rank > 0:
-        comm.send(local_mat[:, 1], dest = rank - 1, tag = 1)
-        recv_right = comm.recv(source = rank -1, tag = 1)
-        local_mat[:,0] = recv_right
-        
+        # print(recvleft)
+        comm.Sendrecv(sendleft, rank - 1, 0, recvleft, rank - 1)
+        # print(recvleft)
+    if rank < size - 1:
+        comm.Sendrecv(sendright, rank + 1, 0,recvright, rank + 1)
+        # print(recvright, sendright)
+        # print(recvright)
+
+    # np.savetxt(f"exchange/r{rank}_i{i:0=4}A.csv",local_mat)
+    # print(rank)
+    if rank > 0:
+        local_mat[:,0] = recvleft
+    if rank < size - 1:
+        local_mat[:,-1] = recvright
+    
+    # np.savetxt(f"exchange/r{rank}_i{i:0=4}B.csv",local_mat)
+
     return local_mat
 
-def ftcs(L,N,tau,D,S,v0,name="untitled.txt"):
+def ftcs(L,N,global_x,tau,D,S,v0,name="untitled.txt"):
     # x = np.linspace(-L-h,L+h, np.ceil(2*L/h).astype('int')+2)
-    global_array_size = 128 # <-- 128 (or 16) should be any power of 2?
+    global_array_size = global_x # <-- 128 (or 16) should be any power of 2?
     x = np.zeros(global_array_size//size)
     h = 0
     if rank == 0:
@@ -84,7 +97,7 @@ def ftcs(L,N,tau,D,S,v0,name="untitled.txt"):
         comm.Barrier()
     
    
-    np.savetxt(f"{rank}_V.csv", V, delimiter=",")
+    # np.savetxt(f"{rank}_V.csv", V, delimiter=",")
 
     # f.close()
     # print(f'{name} file closed')

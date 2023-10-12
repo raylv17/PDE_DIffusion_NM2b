@@ -1,18 +1,19 @@
 from ftcs import *
 
 L = 5
-N = 50
+N = 2000
 
 tau = 0.001
 v0 = lambda x : float(abs(x)<1.5);
 
-# D = lambda x : 1
-# S = lambda x,t : 0
-D = lambda x : 1-abs(x)/10;
-S = lambda x,t : -4*np.double(abs(x)<0.1 and t>0.1 and  t<0.6);
+D = lambda x : 1
+S = lambda x,t : 0
+# D = lambda x : 1-abs(x)/10;
+# S = lambda x,t : -4*np.double(abs(x)<0.1 and t>0.1 and  t<0.6);
 
-
+time1 = MPI.Wtime()
 [V1,x,t] = ftcs(L,N,tau,D,S,v0,name="out_DS0.txt");
+time2 = MPI.Wtime()
 # print(f"rank : {rank} | {V1[3,:]}")
 # np.savetxt("V_full.csv", V1, delimiter=",")
 # print(f"rank : {rank} show")
@@ -24,6 +25,7 @@ global_V1 = comm.gather(V1, root = 0)
 global_x  = comm.gather(x, root = 0)
 
 if rank == 0:
+    print(f"time:{time2-time1}")
     V1 = np.concatenate(global_V1, axis=1)
     # print(f"rank : A | {V1}")
     np.savetxt(f"V_all{size}.csv", V1, delimiter=",")
