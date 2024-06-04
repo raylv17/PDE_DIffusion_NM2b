@@ -5,4 +5,4 @@
 #SBATCH --exclusive
 #SBATCH --partition=compute2011
 
-mpirun python diffusion.py >> n2s32output
+mpirun python diffusion.py

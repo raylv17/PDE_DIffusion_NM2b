@@ -1,8 +1,8 @@
 from ftcs import *
-import sys
+
 L = 5
 N = 2000
-global_x = 256 # from 2^n (n > procs) e.g n=128
+global_x = _divs # from 2^n (n > procs) e.g n=128
 h = 2*L/global_x
 
 tau = 0.001

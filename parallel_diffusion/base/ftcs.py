@@ -13,7 +13,7 @@ def create_halo(local_mat, h):
         shape = np.shape(local_mat[:,0])
         # print(f"shape : {shape}")
         local_mat = np.c_[np.zeros(shape), local_mat, np.zeros(shape)]
-    elif len(np.shape(local_mat)) == 1:
+    elif len(np.shape(local_mat)) == 1: # for row matrices e.g [a,b,c,..] np.shape returns (1,) instead of (1,0)
         local_mat = np.r_[local_mat[0]-h, local_mat, local_mat[-1] + h  ]
     
     # print(f"rank : {rank}")
