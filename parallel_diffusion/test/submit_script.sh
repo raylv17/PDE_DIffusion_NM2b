@@ -5,4 +5,4 @@
 #SBATCH --exclusive
 #SBATCH --partition=compute2011
 
-mpirun python diffusion.py
+mpirun python test_diffusion.py

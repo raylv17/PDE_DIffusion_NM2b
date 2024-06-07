@@ -1,1 +1,1 @@
-scp -r wups:/home/m2132500/Diffusion_Project_Nm2b/to_send/results .
+scp -r wups:/home/m2132500/Diffusion_Project_Nm2b/to_send/results_3 .

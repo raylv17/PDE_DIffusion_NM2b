@@ -3,7 +3,7 @@ from ftcs import *
 L = 5
 N = 2000
 
-h = 0.1
+h = 0.
 tau = 0.001
 v0 = lambda x : float(abs(x)<1.5);
 

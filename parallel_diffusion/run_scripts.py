@@ -3,10 +3,10 @@ import shutil
 import glob
 import time
 
-nodes = [1,2]
-procs = [2,4,8,16,32]
+nodes  = [1,2,3]
+procs  = [2,4,8,16,32,64]
 x_divs = [2,4,8,16,32,64,128]
-repeat = [1,2,3]
+repeat = [1]
 
 base_path = os.path.join(os.getcwd(),"base")
 # case_path = os.path.join(os.getcwd(),"results")
@@ -30,9 +30,11 @@ for r in repeat:
             shutil.copy(base_ftcs_path, dir_name)
             shutil.copy(base_submit_script_path, dir_name)
             # shutil.copy(os.path.join(base_path,"sleep.py"), dir_name)
-            node = nodes[1] # 2
-            if p < 8:
-                node = nodes[0] # 1
+            node = nodes[0] # 1 [2,4]
+            if  8 <= p <= 32:
+                node = nodes[1] # 2 [8, 16, 32]
+            elif p > 32:
+                node = nodes[2] # 3 [64]
             # modification of params on each case
             dir_name = os.path.join(case_path,f"p-{p}",f"divs-{d}")
             case_submit_script_path = os.path.join(dir_name, "submit_script.sh")
@@ -57,23 +59,15 @@ for r in repeat:
             file.close()
 
             # run case inside each case directory
-            # os.chdir(dir_name)
-            # os.system("sbatch submit_script.sh")
-            # count = 0
-            # while not(glob.glob("*.png") and count < 20): # wait 10 seconds max
-            #     time.sleep(0.5)
-            #     count = count + 1
+            os.chdir(dir_name)
+            os.system("sbatch submit_script.sh")
+            # time out 
+            count = 0
+            while not(glob.glob("*.png")): # wait 20 seconds max
+                time.sleep(1)
+                count = count + 1
+                if count > 900:
+                    print("time-out")
+                    break
             
-            # print(f"continuing {p}-{d}")
-
-
-
-
-
-
-        
-        
-            
-
-        
-
+            print(f"continuing {r}-procs{p}-divs{d}-node{node}")
