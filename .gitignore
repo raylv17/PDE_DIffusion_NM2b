@@ -12,7 +12,7 @@
 !/parallel_diffusion/base/submit_script.sh
 !/parallel_diffusion/test/test_diffusion.py
 !/parallel_diffusion/test/test_ftcs.py
-!/parallel_diffusion/test/submit_script.sh
+!/parallel_diffusion/test/test_submit_script.sh
 !/parallel_diffusion/scp_collect_results_folder.bat
 !/parallel_diffusion/scp_send_folder.bat
 !/parallel_diffusion/plots.py

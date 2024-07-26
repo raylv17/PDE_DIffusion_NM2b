@@ -5,7 +5,7 @@ import time
 
 nodes  = [1,2,3]
 procs  = [2,4,8,16,32,64]
-x_divs = [2,4,8,16,32,64,128]
+x_divs = [8,16,32,64,128,192]
 repeat = [1]
 
 base_path = os.path.join(os.getcwd(),"base")
@@ -18,10 +18,17 @@ base_submit_script_path = os.path.join(base_path,"submit_script.sh")
 
 for r in repeat:
     case_path = os.path.join(os.getcwd(),f"results_{r}")
+    print(f"case_number: {case_path[-1]}")
     i = 0
     for p in procs:
-        i = i + 1
-        for d in x_divs[i-1:]:
+        if p >= 16:
+            # to keep current divs > current number of procs used.
+            i = i + 1 
+            sliced_divs = x_divs[i:] 
+        else:
+            sliced_divs = x_divs[:]
+        
+        for d in sliced_divs:
             # make path to each case
             dir_name = os.path.join(case_path,f"p-{p}",f"divs-{d}")
             if not(os.path.isdir(dir_name)): os.makedirs(dir_name)
@@ -60,14 +67,45 @@ for r in repeat:
 
             # run case inside each case directory
             os.chdir(dir_name)
-            os.system("sbatch submit_script.sh")
-            # time out 
+            # if case already executed previously, don't resubmit
+            if not os.path.isfile(os.path.join(os.getcwd(),f"p-{p}.jpg")):
+                os.system("sbatch submit_script.sh")
+            else:
+                print(f"skipping: {r}-procs{p}-divs{d}, it's already finished")
+            
+            # wait for case to be finished before executing another 
+            # (checks whether .png was generated)
             count = 0
-            while not(glob.glob("*.png")): # wait 20 seconds max
+            while not(glob.glob("*.png")): # wait 20 seconds max (give time-out error)
                 time.sleep(1)
                 count = count + 1
-                if count > 900:
+                if count > 20: # works for tau = 0.001
                     print("time-out")
                     break
             
-            print(f"continuing {r}-procs{p}-divs{d}-node{node}")
+            print(f"    {r}-procs{p}-divs{d}-node{node} submitted")
+
+        os.chdir(case_path)
+        os.chdir("..")
+
+print("creating strong_scaling plots")
+os.system("python plots.py")
+
+# Organize results
+# compiled_results_folder_name = "results"
+# compiled_plots_folder_name = "plots"
+# if not os.path.isdir(compiled_results_folder_name):
+#     os.mkdir("results")
+# if not os.path.isdir(compiled_plots_folder_name):
+#     os.mkdir("plots")
+
+# results_dirs = glob.glob("results_*")
+# plots_dirs = glob.glob("plot_*")
+
+# for res_dir in results_dirs:
+#     shutil.move(res_dir,compiled_results_folder_name)
+
+# for plt_dir in plots_dirs:
+#     shutil.move(plt_dir,compiled_plots_folder_name)
+
+

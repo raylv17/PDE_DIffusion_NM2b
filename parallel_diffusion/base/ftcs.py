@@ -69,7 +69,7 @@ def ftcs(L,N,global_x,tau,D,S,v0,name="untitled.txt"):
     comm.Scatter(global_x, x, root = 0)
     x = create_halo(x,h)
     # print(f"at rank : {rank}, len(x) : {len(x)}")
-    V = np.zeros([N, np.size(x)]);
+    V = np.zeros([N, np.size(x)])
     
     
     # print(np.shape(V))
@@ -101,9 +101,9 @@ def ftcs(L,N,global_x,tau,D,S,v0,name="untitled.txt"):
 
     # f.close()
     # print(f'{name} file closed')
-    t = np.arange(0,N)*tau;
+    t = np.arange(0,N)*tau
     # keep only -L <= x <= L
-    V = V[:,1:-1];
-    x = x[1:-1];
+    V = V[:,1:-1]
+    x = x[1:-1]
 
     return V,x,t

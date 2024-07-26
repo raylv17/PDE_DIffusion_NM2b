@@ -1,11 +1,15 @@
 from ftcs import *
 
+# FIXED [Based on given case]
 L = 5 # LENGTH
 T = 2 # TIME
-N = 20000 # Total time steps
+
+# USER INPUT # Variables: Descritization Steps
+N = 2000 # Total time steps
 global_x = _divs # from 2^n (n > procs) e.g n=128
 
-tau = 0.0001  # one time step
+# Start of Program
+tau = float(T/N) # one time step
 h = 2*L/global_x
 
 v0 = lambda x : float(abs(x)<1.5)
