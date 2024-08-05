@@ -1,23 +1,10 @@
-
-*
-# /parallel_diffusion/*
-# /parallel_diffusion/base/*
-# /parallel_diffusion/test/*
-# /serial_diffusion/*
+/serial_diffusion/*
+/parallel_diffusion/numerical_mpi_even/results/results_*
+/parallel_diffusion/numerical_mpi_even/results/plot_t301_results_compiled/
+slurm*
 
 # Ignore all except:
-!/.gitignore
-!/parallel_diffusion/base/diffusion.py
-!/parallel_diffusion/base/ftcs.py
-!/parallel_diffusion/base/submit_script.sh
-!/parallel_diffusion/test/test_diffusion.py
-!/parallel_diffusion/test/test_ftcs.py
-!/parallel_diffusion/test/test_submit_script.sh
-!/parallel_diffusion/scp_collect_results_folder.bat
-!/parallel_diffusion/scp_send_folder.bat
-!/parallel_diffusion/plots.py
-!/parallel_diffusion/run_scripts.py
+!.gitignore
 !/serial_diffusion/diffusion.py
 !/serial_diffusion/ftcs.py
-
 !/README.md

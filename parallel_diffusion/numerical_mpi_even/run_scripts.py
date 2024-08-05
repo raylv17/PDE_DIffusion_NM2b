@@ -3,9 +3,12 @@ import shutil
 import glob
 import time
 
+# DO NOT CHANGE
 nodes  = [1,2,3]
-procs  = [2,4,8,16,32,64]
 x_divs = [8,16,32,64,128,192]
+
+#USER INPUT
+procs  = [2,4,8,16,32,64]
 repeat = [1]
 
 base_path = os.path.join(os.getcwd(),"base")
