@@ -1,5 +1,8 @@
 from test_ftcs import *
-import sys
+import matplotlib.pyplot as plt
+from scipy.special import erf
+from matplotlib import cm
+
 L = 5
 T = 2
 N = 2000
@@ -23,7 +26,7 @@ global_V1 = comm.gather(V1, root = 0)
 global_x  = comm.gather(x, root = 0)
 
 if rank == 0:
-    print(f"procs:{size}, Tau:{tau} h:{h}")
+    print(f"procs:{size}, Tau:{tau}, h:{h}")
     print(f"time: {time2-time1}")
     V1 = np.concatenate(global_V1, axis=1)
     # print(f"rank : A | {V1[3,:]}")

@@ -1,6 +1,6 @@
 from ftcs import *
 
-# FIXED [Based on given case]
+# FIXED [Given Case]
 L = 5 # LENGTH
 T = 2 # TIME
 
@@ -10,30 +10,25 @@ global_x = _divs # from 2^n (n > procs) e.g n=128
 
 # Start of Program
 tau = float(T/N) # one time step
-h = 2*L/global_x
-
-v0 = lambda x : float(abs(x)<1.5)
-
-D = lambda x : 1
-S = lambda x,t : 0
+h = 2*L/global_x # one space step
 
 if rank == 0: print("\n###")
 
 time1 = MPI.Wtime()
-[V1,x,t] = ftcs(L,N,global_x,tau,D,S,v0)
+[V1,x,t] = ftcs(L,N,global_x,tau)
 time2 = MPI.Wtime()
 
+# Gather local solutions from each rank to root
 global_V1 = comm.gather(V1, root = 0)
 global_x  = comm.gather(x, root = 0)
 
+# plot results
 if rank == 0:
     print(f"procs:{size}, Tau:{tau} h:{h}")
     print(f"time: {time2-time1}")
     V1 = np.concatenate(global_V1, axis=1)
-    # print(f"rank : A | {V1[3,:]}")
-    # np.savetxt("V_mat_par.csv", V1, delimiter=",")
-
     x = np.concatenate(global_x)
+    
     print(f"size V1 : {np.shape(V1)}")
     print(f"size x  : {np.shape(x)}")
     print(f"size t  : {np.shape(t)}")

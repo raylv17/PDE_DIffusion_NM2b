@@ -3,12 +3,11 @@ import shutil
 import matplotlib.pyplot as plt
 import glob
 import numpy as np
+from input_params import *
 
-procs = [2,4,8,16,32,64]
-xdivs = [2,4,8,16,32,64,128,192]
-# results = [1]
-delta_t = "plot_t301"
-results = [1,2,3]
+# x_divs = [128]
+# procs = [4]
+# repeat = [1]
 
 
 path = os.path.join(os.getcwd())
@@ -16,12 +15,13 @@ results_dir = f"{delta_t}_results_compiled"
 if not(os.path.isdir(results_dir)):
     os.makedirs(results_dir)
 
-
+x_divs = np.array(x_divs)
 # collect out file from each case
-for r in results:
+for r in range(1,repeat+1):
     i = 0
     for p in procs:
-        for d in xdivs[i:]:
+        sliced_divs = x_divs[np.where(x_divs>=p)]
+        for d in sliced_divs:
             case_name = os.path.join(f"results_{r}",f"p-{p}", f"divs-{d}")
             case_dir = os.path.join(path,case_name)
             new_out = f"out-{r}-{p}-{d}.txt"
@@ -39,19 +39,19 @@ for r in results:
 
 # prepare times dictionary for each case.
 times = {}
-for r in results:
+for r in range(1,repeat+1):
     i = 0
     for p in procs:
-        for d in xdivs[i:]:
+        for d in x_divs[i:]:
             case= f"{r}-{d}"
             times[case] = []
         i = i + 1
 
 # collect times for each case
-for r in results:
+for r in range(1,repeat+1):
     i = 0
     for p in procs:
-        for d in xdivs[i:]:
+        for d in x_divs[i:]:
             out_file = os.path.join(results_dir,f"out-{r}-{p}-{d}.txt")
             if (os.path.isfile(os.path.join(out_file))):
                 with open(out_file) as file:
@@ -89,7 +89,7 @@ def print_plots(div):
     plt.savefig(os.path.join(plots_dir, f"{div}-plot"), dpi=300)
 
 
-for d in xdivs:
+for d in x_divs:
     print_plots(d)
 
 print(f"plots created at {results_dir}")
