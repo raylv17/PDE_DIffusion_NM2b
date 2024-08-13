@@ -28,7 +28,7 @@ if rank == 0:
     print(f"time: {time2-time1}")
     V1 = np.concatenate(global_V1, axis=1)
     x = np.concatenate(global_x)
-    
+
     print(f"size V1 : {np.shape(V1)}")
     print(f"size x  : {np.shape(x)}")
     print(f"size t  : {np.shape(t)}")

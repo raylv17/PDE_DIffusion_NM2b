@@ -1,0 +1,8 @@
+
+###
+size of local_x : 8
+procs:2, Tau:0.001 h:0.625
+time: 0.6655499935150146
+size V1 : (2000, 16)
+size x  : (16,)
+size t  : (2000,)
