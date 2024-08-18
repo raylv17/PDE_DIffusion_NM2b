@@ -1,0 +1,18 @@
+## Send script files to cluster
+To run parallelized mode, you need to send the files to a cluster
+    EITHER change `scp_send_folder.bat`
+    OR send the following files manually:
+        base/
+        input_params.py
+        main.py
+        run_plots.py
+        script_plot.py
+
+##  After Sending
+within the cluser:
+> open terminal and enter the following commands:
+$ module load tools/anaconda
+$ python run_scripts
+
+
+# Parameters can be set from `input_params.py`
