@@ -1,0 +1,8 @@
+\section{Conclusion}
+The assumptions made in the implementation of the overall project is discussed in this section and the ideas for improvement are also briefly presented.
+
+\subsection{Uneven Distrbution: \texttt{Scatterv()}}
+The minimum step-size $h$ used in the serial method is not used in the parallel method, reason being that we wanted even distribution of the decomposed domain and also to always keep the number of processes as a power of 2. This is a voluntary choice to easily distribute the decomposition through a simple method \texttt{Scatter()}. However, if further customization is needed, we can make the distribution uneven as well using \texttt{Scatterv()}, for this the first \texttt{rank} will the remainder of the decomposed domain. The uneven distribution allows us to use any number of processes, with no issues in using the same minimum step-size as in the serial method.
+
+\subsection{Final Thoughts}
+The overall project was exciting as well as very informative. We, however, find using MPI in C/C++ a bit more clear and explicit as opposed to \texttt{mpi4py} in Python which we found a bit less intuitive and abstract. But this hands-on approach to an MPI Project really made us appreciate the usefulness of parallelization in research projects as well as numerical methods.

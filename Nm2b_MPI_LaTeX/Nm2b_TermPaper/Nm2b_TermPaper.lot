@@ -1,0 +1,6 @@
+\contentsline {table}{\numberline {1}{\ignorespaces $\tau $ and $h$ that satisfy the stability condition \autoref {eq:Stabilitycondition}, and the corresponding \#cols for the solution matrix (i.e. the number of discretized cells in space) \relax }}{5}{table.caption.7}%
+\contentsline {table}{\numberline {2}{\ignorespaces Execution times for each case. The size of \texttt {V} significantly increases with finer $\tau $ and $h$, thus increasing execution times. These programs were executed in the \textbf {stromboli} environment\relax }}{7}{table.caption.13}%
+\contentsline {table}{\numberline {3}{\ignorespaces Domain decomposition for \texttt {sizes}: $2^k\leq 64$ and $\tau =0.001$\relax }}{9}{table.caption.14}%
+\contentsline {table}{\numberline {4}{\ignorespaces Domain decomposition for \texttt {sizes}: $2^k\leq 64$ and $\tau =0.0001$\relax }}{9}{table.caption.15}%
+\contentsline {table}{\numberline {5}{\ignorespaces All 36 subcases for Case1: $\tau =0.001$\relax }}{11}{table.caption.19}%
+\contentsline {table}{\numberline {6}{\ignorespaces All 64 subcases for Case1: $\tau =0.0001$\relax }}{12}{table.caption.20}%

@@ -1,0 +1,79 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts, amssymb, amsmath}
+\usepackage[a4paper, margin=1.1in]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{graphicx} % required for inserting images
+\usepackage[margin=2cm]{caption}
+\usepackage[backend=biber]{biblatex}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    % numbers=left,                    
+    % numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+\renewcommand{\figureautorefname}{Fig.}
+\renewcommand{\equationautorefname}{Eq.}
+\renewcommand{\tableautorefname}{Tab.}
+\renewcommand{\subsectionautorefname}{Section.}
+\renewcommand{\sectionautorefname}{Section.}
+
+\renewcommand{\arraystretch}{1.5}
+
+\addbibresource{bibliography/sample.bib}
+\input{figures/figures_tikz.tex}
+
+\setlength{\parindent}{0in}
+
+
+\title{Term Paper – Parallelized FTCS Method}
+\author{Rafay Nawaid Alvi–2132500 \& Haider Hussain–2131610}
+%\date{July 2023}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\pagebreak
+\input{sections/introduction.tex}
+
+\input{sections/serial_method.tex}
+\pagebreak
+\input{sections/parallel_method.tex}
+\pagebreak
+\input{sections/conclusion.tex}
+\newpage
+\listoffigures
+\listoftables
+
+
+\newpage
+\printbibliography
+\end{document}

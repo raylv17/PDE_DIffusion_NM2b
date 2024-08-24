@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Serial Method}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Domain Discretization}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Boundary and Initial Conditions}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Solution Matrix}{3}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Stability Condition}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Python Program (Serial)}{5}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Program Files}{6}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Results}{7}{subsection.2.7}%
+\contentsline {section}{\numberline {3}Parallel Method}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Domain Decomposition}{8}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Communication}{10}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Project Files and Submissions to SLURM}{11}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Scalability Plot: Strong Scaling}{13}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Conclusion}{16}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Uneven Distrbution: \texttt {Scatterv()}}{16}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Final Thoughts}{16}{subsection.4.2}%
