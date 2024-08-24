@@ -21,7 +21,7 @@ for r in range(1,repeat+1):
             modify_case_params(case_path,dir_name,node,p,d)
 
             # run case inside each case directory
-            # run_case(dir_name,r,p,d,node)
+            run_case(dir_name,r,p,d,node)
 
         # os.chdir(case_path)
         # os.chdir("..")

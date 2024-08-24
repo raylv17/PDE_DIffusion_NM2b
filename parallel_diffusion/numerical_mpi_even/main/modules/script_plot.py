@@ -136,10 +136,11 @@ def gen_step_size_time_plot(out_files : list, times_per_proc_dict : dict, max_ti
         if r == out_files[0][0] and p == out_files[0][1]:
             x_divs = np.append(x_divs, d)
     
+    max_time = max(times_per_proc_dict['1-1'])
     # generate plot
     plt.clf()
     fig, ax = plt.subplots()
-    ax.set_yticks(range(0,int(round(max_time, axy_round)),axy_ticks))
+    # ax.set_yticks(range(0,int(round(max_time, axy_round)),axy_ticks))
     ax.set_xticks(range(0,x_divs[-1]+1,ax_step_ticks))
     ax.set_xticklabels(labels=range(0,x_divs[-1]+1,ax_step_ticks), rotation=60, fontsize=8)
     sec = ax.secondary_xaxis(location=1)
@@ -153,11 +154,13 @@ def gen_step_size_time_plot(out_files : list, times_per_proc_dict : dict, max_ti
             proc = int(case_name.split("-")[1])
             # increase starting value of x_div based on proc
             case_divs = x_divs[np.where(x_divs >= proc)]
-            ax.plot(case_divs, times,"-o",markersize=3, label=f"p-{proc}")
+            ax.plot(case_divs, np.array(times),"-o",markersize=3, label=f"procs-{proc}")
 
     ax.set_xlabel("# decretized cells")
     ax.set_ylabel("time [s]")
     sec.set_xlabel("step-size [h]")
+
+    # plt.text(203, max_time, f'{max_time:.2f}s')
     plt.legend()
     plt.grid()
     plt.savefig(os.path.join(delta_t,"const_proc_plot"), dpi=300)
