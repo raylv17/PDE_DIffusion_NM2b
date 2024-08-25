@@ -3,10 +3,10 @@ To run parallelized mode, you need to send the files to a cluster
     EITHER change `scp_send_folder.bat`
     OR send the following files manually:
         base/
+        modules/
         input_params.py
         main.py
         run_plots.py
-        script_plot.py
 
 ##  After Sending
 within the cluser:
