@@ -12,7 +12,8 @@ delta_t = "plot_t301"
 # repeat = 3
 # delta_t = "plot_t401"
 
-## SAMPLE: SMALL INPUT
+## SAMPLE: SAMPLE SMALL INPUT
+# tau = 0.001
 # x_divs = [128]
 # procs  = [8]
 # repeat = 1
