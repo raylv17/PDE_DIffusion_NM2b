@@ -1,5 +1,5 @@
 \section{Parallel Method}
-This section modifies the implementation done in the previous section such that numerical method is run by more than a single processor. The main idea is to divide the domain from \autoref{fig:DescretizedDomain} and distribute it to a certain number of processors. Since each processor has one chunk of the entire domain, they can all locally solve for their domains simultaneously and combine the results, resulting in a significant decrease in the total execution time. This approach makes use of the module \texttt{mpi4py}.
+This section modifies the implementation done in the previous section such that numerical method is run by more than a single processor. The main idea is to divide the domain from \autoref{fig:DescretizedDomain} and distribute it to a certain number of processors. Since each processor has one chunk of the entire domain, they can all locally solve for their domains simultaneously and combine the results, resulting in a significant decrease in the total execution time. In Python, this approach makes use of the MPI (Message Passing Interface) module \texttt{mpi4py}.
 
 In accordance with convention, the terminology \texttt{rank} will be used to refer to individual processes. And to keep things easier, the \texttt{size} (i.e. the total number of \texttt{ranks}) is chosen to always be a power of 2, i.e. $\texttt{size}= 2^r$, where $ r\in \mathbb{N}_{0}$ (non-negative integer).
 
@@ -266,7 +266,7 @@ run_case() # run case inside each case directory
 \label{fig:mainpy}
 \end{figure}
 
-This is repeated 3 times, as indicated in \autoref{fig:inputparams}, resulting in the directories \texttt{results\_1/}, \texttt{results\_2/}, and \texttt{results\_3/}. Each \texttt{results} folder contains all simulations for a given $\tau$. These paramters can be changed from \texttt{input\_params.py}.
+This is \texttt{repeated} 3 times, as indicated in \autoref{fig:inputparams}, resulting in the directories \texttt{results\_1/}, \texttt{results\_2/}, and \texttt{results\_3/}. Each \texttt{results} folder contains all simulations for a given $\tau$ with similar plots as \autoref{fig:SerialResult}. The parameters for a different $\tau$ can be changed in \texttt{input\_params.py}.
 
 \begin{figure}[H]
 \begin{lstlisting}[language=Python]

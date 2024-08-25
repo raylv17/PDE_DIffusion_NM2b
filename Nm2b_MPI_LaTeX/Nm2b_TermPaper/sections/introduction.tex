@@ -1,6 +1,6 @@
 \section{Introduction}
 
-The project is to parallelize the FTCS (Forward Time Central Space) method to solve the given PDE (Partial Differential Equation) using \texttt{Python} and \texttt{mpi4py}. FTCS method is an explicit time-stepping method for numerically solving Parabolic PDEs \cite{griffiths}. The given equation is the incompressible Navier Stokes Equation, i.e. diffusion-convection equation. This particular PDE is further simplifed to a Pure-Diffusion Equation.
+The project is to parallelize the FTCS (Forward Time Central Space) method to solve the given PDE (Partial Differential Equation) using \texttt{Python} and \texttt{mpi4py}. FTCS method is an explicit time-stepping method for numerically solving Parabolic PDEs \cite{tannehill}. The given equation is the incompressible Navier Stokes Equation, i.e. diffusion-convection equation. This particular PDE is further simplifed to a Pure-Diffusion Equation \cite{paper}.
 \begin{equation}
     \displaystyle{\frac{\partial v}{\partial t} = \frac{\partial}{\partial x}\left[D(x)\frac{\partial v}{\partial x}\right]+ S(x,t)}
     \label{eq:De}
@@ -21,7 +21,7 @@ For our particular case, we will be solving the equation in (1+1)-Dimension i.e.
 
 \figRod
 
-This project will discuss the numerical solution of the equation using the serial method and most importantly the parallelized method. In the first section, we'll discuss the algorithm of the FTCS method implemented serially (i.e. using a single processor), the discretization of the equation, stability condition, the corresponding code, results, and plots.
+This project will discuss the numerical solution of the equation using the serial method and most importantly the parallelized method. In the first section, we'll discuss the algorithm of the FTCS method implemented serially (i.e. using a single process or \texttt{rank}), the discretization of the equation, stability condition, the corresponding code, results, and plots.
 
 The second section will primarily focus on the parallelization of the method, we'll use the same numerical method from the previous section, but also introduce communication between different processors. The relevant code to implement parallelization is also discussed. Finally, the results and plots of this method are compared and evaluated with the results of the first section. The last section will share the limitations and what can be done for further improvement of the current code.
 
